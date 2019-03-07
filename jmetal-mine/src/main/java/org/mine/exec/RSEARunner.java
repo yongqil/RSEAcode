@@ -29,11 +29,6 @@ import org.uma.jmetal.util.AlgorithmRunner;
 import org.uma.jmetal.util.JMetalLogger;
 import org.uma.jmetal.util.solutionattribute.impl.OverallConstraintViolation;
 
-import com.mathworks.toolbox.javabuilder.MWException;
-
-import MatlabPlot.LinePlot;
-import MatlabPlot.ScatterPlot;
-
 /**
  * Class for configuring and running the RSEA algorithm;
  * A Region Search Evolutionary Algorithm for Many-Objective Optimization
@@ -50,7 +45,7 @@ public class RSEARunner extends AbstractAlgorithmRunner {
 
 	private static int nfun = 3;
 
-	public static void main(String[] args) throws FileNotFoundException, MWException {
+	public static void main(String[] args) throws FileNotFoundException {
 		
 		DoubleProblem problem;
 		Algorithm<List<DoubleSolution>> algorithm;
@@ -58,7 +53,7 @@ public class RSEARunner extends AbstractAlgorithmRunner {
 		CrossoverOperator<DoubleSolution> crossover;
 		String referenceParetoFront = "";
 		//      referenceParetoFront = "/pareto_fronts/DTLZ1.10D.pf";
-		//      referenceParetoFront = "/pareto_fronts/Convex_DTLZ2.3D.pf";
+		 referenceParetoFront = "/pareto_fronts/Convex_DTLZ2.3D.pf";
 
 
 //		problem = new  DTLZ1(nfun+4,nfun);
@@ -68,7 +63,7 @@ public class RSEARunner extends AbstractAlgorithmRunner {
 		//    problem = new  DTLZ5(nfun+9,nfun);
 		//    problem = new  DTLZ6(nfun+9,nfun);
 		//    problem = new  DTLZ7(nfun+19,nfun);
-//		problem = new  Convex_DTLZ2(nfun+9,nfun);
+		problem = new  Convex_DTLZ2(nfun+9,nfun);
 		//    problem = new  Convex_DTLZ3(nfun+9,nfun);
 		//    problem = new  SDTLZ1(nfun+4,nfun);
 		//    problem = new  SDTLZ2(nfun+9,nfun);
@@ -79,7 +74,7 @@ public class RSEARunner extends AbstractAlgorithmRunner {
 //		    problem = new  ConvexC2_DTLZ2(nfun+9,nfun);
 //		    problem = new  C3_DTLZ1(nfun+4,nfun,nfun);
 //		    problem = new  C3_DTLZ4(nfun+4,nfun,nfun);
-		    problem = new  WFG1(2*(nfun-1),20,nfun);
+//		    problem = new  WFG1(2*(nfun-1),20,nfun);
 		//    problem = new  WFG2(2*(nfun-1),20,nfun);
 		//    problem = new  WFG3(2*(nfun-1),20,nfun);
 		//    problem = new  WFG4(2*(nfun-1),20,nfun);
@@ -101,10 +96,9 @@ public class RSEARunner extends AbstractAlgorithmRunner {
 				.setCrossover(crossover)
 				.setMutation(mutation)
 				.setPopulationSize(91)
-				.setMaxEvaluations(91*3000)
+				.setMaxEvaluations(91*750)
 				.setNeighborhoodSelectionProbability(0.9)
 				.setNeighborSize(20)
-				.setPlot(true) // The plot function need matlab 
 				.setNormalize(true)
 				.build() ;
 
@@ -118,35 +112,6 @@ public class RSEARunner extends AbstractAlgorithmRunner {
 		if (!referenceParetoFront.equals("")) {
 			printQualityIndicators(population, referenceParetoFront) ;
 		}
-		if(false){
-			OverallConstraintViolation<DoubleSolution> overallConstraintViolation = new OverallConstraintViolation<DoubleSolution>(); 
-			ScatterPlot scatterplot = new ScatterPlot();
-			LinePlot linePlotVar = new LinePlot();
-			LinePlot linePlotObj = new LinePlot();
-			double[][] fit = new double[population.get(0).getNumberOfObjectives()][population.size()];
-			double[][] var = new double[population.size()][population.get(0).getNumberOfVariables()];
-			for (int i = 0; i < population.size(); i++) {
-				if(overallConstraintViolation.getAttribute(population.get(i))<0) continue;
-				for (int j = 0; j < population.get(0).getNumberOfObjectives(); j++) {
-					fit[j][i] = (population.get(i).getObjective(j));
-				}
-				for (int j = 0; j < population.get(0).getNumberOfVariables(); j++) {
-					var[i][j] = (double) population.get(i).getVariableValue(j);
-				}
-			}
-			if(fit.length==2){
-				scatterplot.plot2scatter(fit[0],fit[1]);
-			}else if(fit.length==3){
-
-				scatterplot.plot3scatter(fit[0],fit[1],fit[2]);
-
-			}else{
-				linePlotObj.plotlines(fit);
-			}
-			linePlotVar.plotlines(var);
-		}
-
-
 
 	}
 }
