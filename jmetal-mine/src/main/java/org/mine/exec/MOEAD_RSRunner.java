@@ -29,11 +29,6 @@ import org.uma.jmetal.util.AlgorithmRunner;
 import org.uma.jmetal.util.JMetalLogger;
 import org.uma.jmetal.util.solutionattribute.impl.OverallConstraintViolation;
 
-import com.mathworks.toolbox.javabuilder.MWException;
-
-import MatlabPlot.LinePlot;
-import MatlabPlot.ScatterPlot;
-
 /**
  * Class for configuring and running the MOEA/D-RS algorithm
  *
@@ -49,7 +44,7 @@ public class MOEAD_RSRunner extends AbstractAlgorithmRunner {
 
 	private static int nfun = 3;
 
-	public static void main(String[] args) throws FileNotFoundException, MWException {
+	public static void main(String[] args) throws FileNotFoundException {
 		DoubleProblem problem;
 		Algorithm<List<DoubleSolution>> algorithm;
 		MutationOperator<DoubleSolution> mutation;
@@ -110,7 +105,6 @@ public class MOEAD_RSRunner extends AbstractAlgorithmRunner {
 				//                .setResultPopulationSize(91)
 				.setNeighborhoodSelectionProbability(0.9)
 				.setNeighborSize(20)
-				.setPlot(true)
 				.setNormalize(false)
 				.build() ;
 
@@ -124,35 +118,6 @@ public class MOEAD_RSRunner extends AbstractAlgorithmRunner {
 		if (!referenceParetoFront.equals("")) {
 			printQualityIndicators(population, referenceParetoFront) ;
 		}
-		if(false){
-			OverallConstraintViolation<DoubleSolution> overallConstraintViolation = new OverallConstraintViolation<DoubleSolution>(); 
-			ScatterPlot scatterplot = new ScatterPlot();
-			LinePlot linePlotVar = new LinePlot();
-			LinePlot linePlotObj = new LinePlot();
-			double[][] fit = new double[population.get(0).getNumberOfObjectives()][population.size()];
-			double[][] var = new double[population.size()][population.get(0).getNumberOfVariables()];
-			for (int i = 0; i < population.size(); i++) {
-				if(overallConstraintViolation.getAttribute(population.get(i))<0) continue;
-				for (int j = 0; j < population.get(0).getNumberOfObjectives(); j++) {
-					fit[j][i] = (population.get(i).getObjective(j));
-				}
-				for (int j = 0; j < population.get(0).getNumberOfVariables(); j++) {
-					var[i][j] = (double) population.get(i).getVariableValue(j);
-				}
-			}
-			if(fit.length==2){
-				scatterplot.plot2scatter(fit[0],fit[1]);
-			}else if(fit.length==3){
-
-				scatterplot.plot3scatter(fit[0],fit[1],fit[2]);
-
-			}else{
-				linePlotObj.plotlines(fit);
-			}
-			linePlotVar.plotlines(var);
-		}
-
-
 
 	}
 }
