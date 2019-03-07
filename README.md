@@ -1,10 +1,11 @@
 ## RSEA
-A Region Search Evolutionary Algorithm for Many-Objective Optimization
+A Region Search Evolutionary Algorithm for Many-Objective Optimization  
 In the project
 
 ## Publications
 Y. Liu, H. Qin et. al, "A Region Search Evolutionary Algorithm for Many-Objective Optimization". Information Sciences, 2019. DOI:  
 If 
+Code also see from (https://www.researchgate.net/profile/Yongqi_Liu/publications)
 
 ## The code is build based on jMetal
 **jMetal** is an object-oriented Java-based framework for multi-objective optimization with metaheuristics.
