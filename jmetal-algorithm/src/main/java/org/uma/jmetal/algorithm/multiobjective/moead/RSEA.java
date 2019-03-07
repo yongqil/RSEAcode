@@ -19,11 +19,6 @@ import org.uma.jmetal.util.JMetalException;
 import org.uma.jmetal.util.comparator.DominanceComparator;
 import org.uma.jmetal.util.comparator.impl.OverallConstraintViolationComparator;
 
-import com.mathworks.toolbox.javabuilder.MWException;
-
-import MatlabPlot.LinePlot;
-import MatlabPlot.ScatterPlot;
-
 
 /**
  * A Region Search Evolutionary Algorithm for Many-Objective Optimization
@@ -45,10 +40,6 @@ public class RSEA<S extends Solution<?>>  extends AbstractMOEAD<DoubleSolution>{
 	private static final Comparator<Solution<?>> CONSTRAINT_VIOLATION_COMPARATOR =
 			new OverallConstraintViolationComparator<Solution<?>>();
 
-	protected ScatterPlot scatterplot = null;
-	protected LinePlot linePlotVar = null;
-	protected LinePlot linePlotObj = null;
-	
 	boolean normalnized;
 	List<DoubleSolution> extremePoint = new ArrayList<>();
 	List<Double> intercepts;
@@ -87,42 +78,6 @@ public class RSEA<S extends Solution<?>>  extends AbstractMOEAD<DoubleSolution>{
 		
 		evaluations = populationSize ;
 		do {
-
-			/*Plot*/
-			try {
-				
-				if(isPlot() && evaluations/populationSize%10==0){
-
-					if(scatterplot==null){
-						scatterplot = new ScatterPlot();
-						linePlotVar = new LinePlot();
-						linePlotObj = new LinePlot();
-					}
-					double[][] fit = new double[population.get(0).getNumberOfObjectives()][population.size()];
-					double[][] var = new double[population.size()][population.get(0).getNumberOfVariables()];
-					for (int i = 0; i < population.size(); i++) {
-						for (int j = 0; j < population.get(0).getNumberOfObjectives(); j++) {
-							fit[j][i] = (population.get(i).getObjective(j));
-						}
-						for (int j = 0; j < population.get(0).getNumberOfVariables(); j++) {
-							var[i][j] = (double) population.get(i).getVariableValue(j);
-						}
-					}
-					if(fit.length==2){
-						scatterplot.plot2scatter(fit[0],fit[1],"Gener"+evaluations/populationSize);
-					}else if(fit.length==3){
-
-						scatterplot.plot3scatter(fit[0],fit[1],fit[2],"Gener"+evaluations/populationSize);
-
-					}else{
-						linePlotObj.plotlines(fit,"Gener"+evaluations/populationSize);
-					}
-					linePlotVar.plotlines(var,"Gener"+evaluations/populationSize);
-				}
-			} catch (MWException e) {
-				e.printStackTrace();
-			}
-
 
 			int[] permutation = new int[populationSize];
 			MOEADUtils.randomPermutation(permutation, populationSize);
