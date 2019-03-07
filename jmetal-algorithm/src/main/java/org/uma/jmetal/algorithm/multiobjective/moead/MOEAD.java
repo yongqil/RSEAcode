@@ -13,11 +13,6 @@ import org.uma.jmetal.operator.impl.crossover.SBXCrossover;
 import org.uma.jmetal.problem.Problem;
 import org.uma.jmetal.solution.DoubleSolution;
 
-import com.mathworks.toolbox.javabuilder.MWException;
-
-import MatlabPlot.LinePlot;
-import MatlabPlot.ScatterPlot;
-
 /**
  * Class implementing the MOEA/D-DE algorithm described in :
  * Hui Li; Qingfu Zhang, "Multiobjective Optimization Problems With Complicated Pareto Sets,
@@ -30,9 +25,6 @@ import MatlabPlot.ScatterPlot;
 @SuppressWarnings("serial")
 public class MOEAD extends AbstractMOEAD<DoubleSolution> {
 	protected  CrossoverOperator<DoubleSolution>  crossover ;
-	protected ScatterPlot scatterplot = null;
-	protected LinePlot linePlotVar = null;
-	protected LinePlot linePlotObj = null;
 	private static SimpleFunctionMethod Smethod = new SimpleFunctionMethodImpl();
 	
 	boolean normalnized;
@@ -75,40 +67,6 @@ public class MOEAD extends AbstractMOEAD<DoubleSolution> {
 
     evaluations = populationSize ;
     do {
-    	/*Plot*/
-    	try {
-    		if(false){
-    			if(scatterplot==null){
-    				scatterplot = new ScatterPlot();
-    				linePlotVar = new LinePlot();
-    				linePlotObj = new LinePlot();
-    			}
-    			double[][] fit = new double[population.get(0).getNumberOfObjectives()][population.size()];
-    			double[][] var = new double[population.size()][population.get(0).getNumberOfVariables()];
-    			for (int i = 0; i < population.size(); i++) {
-    				for (int j = 0; j < population.get(0).getNumberOfObjectives(); j++) {
-    					fit[j][i] = (population.get(i).getObjective(j));
-    				}
-    				for (int j = 0; j < population.get(0).getNumberOfVariables(); j++) {
-    					var[i][j] = (double) population.get(i).getVariableValue(j);
-    				}
-    			}
-    			if(fit.length==2){
-    				scatterplot.plot2scatter(fit[0],fit[1],"Gener"+evaluations/populationSize);
-    			}else if(fit.length==3){
-
-    				scatterplot.plot3scatter(fit[0],fit[1],fit[2],"Gener"+evaluations/populationSize);
-
-    			}else{
-    				linePlotObj.plotlines(fit,"Gener"+evaluations/populationSize);
-    			}
-    			linePlotVar.plotlines(var,"Gener"+evaluations/populationSize);
-    		}
-    	} catch (MWException e) {
-    		// TODO Auto-generated catch block
-    		e.printStackTrace();
-    	}
-    	
       int[] permutation = new int[populationSize];
       MOEADUtils.randomPermutation(permutation, populationSize);
 
