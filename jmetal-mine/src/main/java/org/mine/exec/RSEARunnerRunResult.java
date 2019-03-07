@@ -26,9 +26,6 @@ import org.uma.jmetal.util.point.util.PointSolution;
 import org.uma.jmetal.util.pseudorandom.JMetalRandom;
 import org.uma.jmetal.util.pseudorandom.impl.JavaRandomGenerator;
 
-import com.mathworks.toolbox.javabuilder.MWException;
-
-
 public class RSEARunnerRunResult extends AbstractAlgorithmRunner {
 	/**
 	 * @param args Command line arguments.
@@ -38,7 +35,7 @@ public class RSEARunnerRunResult extends AbstractAlgorithmRunner {
 	 */
 
 
-	public static void main(String[] args) throws FileNotFoundException, MWException {
+	public static void main(String[] args) throws FileNotFoundException {
 
 		Algorithm<List<DoubleSolution>> algorithm;
 		DoubleProblem problem;
@@ -80,7 +77,6 @@ public class RSEARunnerRunResult extends AbstractAlgorithmRunner {
 					.setNeighborSize(runConfiguration.getNeighborhoodSize())
 					.setFunctionType(AbstractMOEAD.FunctionType.PBI)
 					.setDataDirectory("MOEAD_Weights")
-					.setPlot(false)
 					.setNormalize(runConfiguration.isNormalized())
 					.build() ;
 			
