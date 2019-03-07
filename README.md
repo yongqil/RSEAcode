@@ -4,7 +4,7 @@ In the project
 
 ## Publications
 Y. Liu, H. Qin et. al, "A Region Search Evolutionary Algorithm for Many-Objective Optimization". Information Sciences, 2019. DOI:  
-If 
+If    
 Code also see from (https://www.researchgate.net/profile/Yongqi_Liu/publications)
 
 ## The code is build based on jMetal
