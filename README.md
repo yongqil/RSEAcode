@@ -4,7 +4,7 @@ Source code of the paper [A Region Search Evolutionary Algorithm for Many-Object
 Code also can be seen from (https://www.researchgate.net/profile/Yongqi_Liu/publications)
 
 If you use the code or find it helpful, please cite the following paper:  
-Yongqi Liu, Hui Qin, Zhendong Zhang, Liqiang Yao, Chao Wang, Li Mo, Shuo Ouyang ,Jie Li. "A Region Search Evolutionary Algorithm for Many-Objective Optimization", Information Sciences, 2019, doi:https://doi.org/10.1016/j.ins.2019.03.016
+Yongqi Liu, Hui Qin, Zhendong Zhang, Liqiang Yao, Chao Wang, Li Mo, Shuo Ouyang ,Jie Li. "A Region Search Evolutionary Algorithm for Many-Objective Optimization", Information Sciences, 2019, doi:10.1016/j.ins.2019.03.016
 
 ## The code is build based on jMetal
 **jMetal** is an object-oriented Java-based framework for multi-objective optimization with metaheuristics.
