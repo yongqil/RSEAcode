@@ -1,6 +1,6 @@
 About
 -----
-Source code of the paper [A Region Search Evolutionary Algorithm for Many-Objective Optimization] (https://doi.org/10.1016/j.ins.2019.03.016)    
+Source code of the paper [A Region Search Evolutionary Algorithm for Many-Objective Optimization] (https://doi.org/10.1016/j.ins.2019.03.016); 50 days' free access to the article(https://authors.elsevier.com/c/1YjbR4ZQDzkMZ)  
 Code also can be seen from (https://www.researchgate.net/profile/Yongqi_Liu/publications)
 
 If you use the code or find it helpful, please cite the following paper:  
